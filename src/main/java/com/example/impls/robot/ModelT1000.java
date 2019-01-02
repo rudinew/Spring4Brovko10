@@ -1,11 +1,14 @@
 package com.example.impls.robot;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 import com.example.interfaces.Hand;
 import com.example.interfaces.Head;
 import com.example.interfaces.Leg;
 import com.example.interfaces.Robot;
 
-public class ModelT1000 implements Robot {
+public class ModelT1000 implements Robot, InitializingBean, DisposableBean {
 	
 	private Hand hand;
 	private Leg leg;
@@ -115,6 +118,20 @@ public class ModelT1000 implements Robot {
 	
 	public void destroyObject() {
 		System.out.println("destroy");
+	}
+
+	//from DisposableBean
+	@Override
+	public void destroy() throws Exception {
+		System.out.println("DisposableBean destroy");
+		
+	}
+
+	//from InitializingBean
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("InitializingBean afterPropertiesSet");
+		
 	}
 	
 	
